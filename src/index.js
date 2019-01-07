@@ -1,6 +1,12 @@
+/*
+ * @Author: Wang Chao 
+ * @Date: 2019-01-07 17:14:50 
+ * @Last Modified by: Wang Chao
+ * @Last Modified time: 2019-01-07 18:48:24
+ */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './assets/css/index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
