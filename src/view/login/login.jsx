@@ -1,8 +1,8 @@
 /*
  * @Author: Wang Chao 
  * @Date: 2019-01-07 17:14:07 
- * @Last Modified by:   Wang Chao 
- * @Last Modified time: 2019-01-07 17:14:07 
+ * @Last Modified by: Wang Chao
+ * @Last Modified time: 2019-01-08 10:01:03
  */
 import React, { Component } from 'react';
 import { Form, Input, Button } from 'element-react';
@@ -18,6 +18,9 @@ class Login extends Component {
             password: '',
         }
     }
+    componentWillMount() {
+        console.log("woshilogin")
+     }
     onSubmit(e) {
         console.log(this.state.form)
         e.preventDefault();

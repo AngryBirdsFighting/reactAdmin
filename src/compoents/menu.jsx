@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 import { Menu, Icon, Button } from 'antd';
 const SubMenu = Menu.SubMenu;
 class NavMenu extends Component {
@@ -27,7 +28,8 @@ class NavMenu extends Component {
         >
           <Menu.Item key="1">
             <Icon type="pie-chart" />
-            <span>Option 1</span>
+            {/* <span>Option 1</span> */}
+            <Link to={'/main/operation/userManage'}>车辆</Link>
           </Menu.Item>
           <Menu.Item key="2">
             <Icon type="desktop" />
