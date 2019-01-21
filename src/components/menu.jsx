@@ -18,7 +18,7 @@ class NavMenu extends Component {
   render() {
     return (
       <div>
-        <Button type="dashed" className="change-menu" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
+        <Button type="dashed" className="change-menu" onClick={this.toggleCollapsed.bind(this)} style={{ marginBottom: 16 }}>
           <Icon type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} />
         </Button>
         <SiderMenu   

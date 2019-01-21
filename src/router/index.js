@@ -2,7 +2,7 @@
  * @Author: Wang Chao 
  * @Date: 2019-01-07 17:13:25 
  * @Last Modified by: Wang Chao
- * @Last Modified time: 2019-01-21 20:06:15
+ * @Last Modified time: 2019-01-21 20:52:37
  */
 import routes from "./routes"
 import React, { Component } from 'react';
@@ -15,7 +15,6 @@ export default class MRouter extends Component {
     }
     isLogin(component){
         let token = getToken("name")
-        debugger
         return  token  ? component : <Redirect to={'/login'} />;
     }
     render() {
@@ -24,7 +23,7 @@ export default class MRouter extends Component {
                 {routes.map((r) => {
                     const createRouter = r => {
                         // return <Route path={r.path} exact  component={r.component} />
-                          return <Route exact path={r.path}   render={ props => 
+                          return <Route exact path={r.path} key={r.name}   render={ props => 
                             this.isLogin(<r.component {...props}/>)
                          }/>
                     }

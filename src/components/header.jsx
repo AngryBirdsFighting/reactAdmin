@@ -1,8 +1,6 @@
-import React , {Component} from "react"
-import {
-  Icon, Button
-} from 'antd';
-import {setToken} from "../utils/tools"
+import React , { Component } from "react"
+import { Button } from 'antd';
+import { setToken } from "../utils/tools"
 import { withRouter } from 'react-router';
 
 
@@ -13,7 +11,6 @@ class HeaderBar extends Component{
     logOut(){
         console.log(this)
         setToken("name", "")
-        debugger
         this.props.history.push("/login")
     }
     render(){
