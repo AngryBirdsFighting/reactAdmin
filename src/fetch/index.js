@@ -1,8 +1,8 @@
 /*
  * @Author: Wang Chao 
  * @Date: 2019-01-07 17:14:39 
- * @Last Modified by:   Wang Chao 
- * @Last Modified time: 2019-01-07 17:14:39 
+ * @Last Modified by: Wang Chao
+ * @Last Modified time: 2019-01-21 16:28:28
  */
 import Config from "../config";
 import { isEmptyByObj } from "../utils/tools";
@@ -26,7 +26,7 @@ class Fetch {
         return  Promise.race([
             fetch(url,param),
             new Promise(function(resolve,reject){ 
-                setTimeout(()=> reject("408"), Config.overtime)
+                setTimeout(()=> reject({status:"408"}), Config.overtime)
             })
         ]).then( res=> {
             return res          
@@ -37,16 +37,15 @@ class Fetch {
 
     /**发送请求
      * @param {Object} param url接口，data请求参数， method 请求类型，不写为Get
-     * @param  {Function} callback 回调函数
      */
-    async fetchAjax(param, callback){
+    async fetchAjax(param){
         this.reqConfig.method = param.method || "Get";  
         if(param.data && isEmptyByObj(param.data)){
-            if(this.reqConfig.method == "Get"){
+            if(this.reqConfig.method === "Get"){
                 param.url += "?";
                 let i = 0
                 for (const key in param.data) {
-                    if(i != 0 ){
+                    if(i !== 0 ){
                         param.url += "&";
                     }
                     param.url += `${key}=${param.data[key]}`
@@ -57,13 +56,10 @@ class Fetch {
             }
         }  
         var res = await this.request(this.baseUrl + param.url, this.reqConfig);
-        if(res == "408"){
-            callback({},"请求超时")
-        }else if(res.status == 200){
-            callback(await res.json())
-        }else{
-            callback({},this.judgeRes(res))
-        }            
+        if(res.status === 200)
+            return await res.json()
+        else
+            return Promise.reject(this.judgeRes(res))        
     }
 
     // 错误判断

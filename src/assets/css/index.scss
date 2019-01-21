@@ -1,5 +1,7 @@
 @import '~antd/dist/antd.css';
 @import "./main.scss";
+@import "./menu.scss";
+@import "./login.scss";
 body {
     margin: 0;
     padding: 0;
@@ -15,10 +17,3 @@ body {
       monospace;
   }
   
-
-  // 头部样式
-.header{
-  height: 60px; 
-  width: 100%;
-  background: #4285f4
-}

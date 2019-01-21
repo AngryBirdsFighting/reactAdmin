@@ -2,11 +2,11 @@
  * @Author: Wang Chao 
  * @Date: 2019-01-07 17:14:32 
  * @Last Modified by: Wang Chao
- * @Last Modified time: 2019-01-08 19:54:47
+ * @Last Modified time: 2019-01-21 20:02:43
  */
 import React, { Component } from 'react';
-import Menu from "../compoents/menu.jsx";
-import HeaderBar from "../compoents/header.jsx";
+import Menu from "@com//menu.jsx";
+import HeaderBar from "@com//header.jsx";
 import Fetch from "../fetch/"
 import MRouter from "../router"
 
@@ -18,18 +18,20 @@ class Main extends Component {
     // 在 render 之前调用
     componentWillMount() {
         console.log(this.props)
-        // let param = {
-        //     url: "/auth/findMenuPerms",
-        //     data: {}
-        // }
-        // fetch.fetchAjax(param, (res, err) => {
-        //     console.log(res)
-        // })
+        let param = {
+            url: "/auth/findMenuPerms",
+            data: {}
+        }
+        fetch.fetchAjax(param).then(res => {
+            console.log(res)
+        }).catch( err => {
+            console.log(err)
+        })
     }
     render() {
         return (
             <div>
-                <HeaderBar></HeaderBar>
+                <HeaderBar ></HeaderBar>
                 <div className={"app"}>
                     <div className={"app-menu"}>
                         <Menu></Menu></div>

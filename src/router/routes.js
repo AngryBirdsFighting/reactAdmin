@@ -2,7 +2,7 @@
  * @Author: Wang Chao 
  * @Date: 2019-01-07 17:14:03 
  * @Last Modified by: Wang Chao
- * @Last Modified time: 2019-01-08 19:55:52
+ * @Last Modified time: 2019-01-21 16:26:39
  */
 import AsyncComponent from "./asyncComponent"
 const CarManage = AsyncComponent(() => import("@view/operation/carManage"))
@@ -19,7 +19,7 @@ export default [
         path: "/main/operation", name: "operation",
         childrens: [
             { path: "/main/operation/carManage", name: "carManage", component: CarManage },
-            { path: "/main/operation/driverManage", name: "driverManage", component: DriverManage }
+            { path: "/main/operation/driverManage", name: "driverManage", component: DriverManage } 
         ]
     },
     {

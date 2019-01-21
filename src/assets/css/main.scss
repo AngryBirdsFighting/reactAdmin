@@ -1,17 +1,28 @@
+
+  // 头部样式
+  .header{
+    height: 60px; 
+    width: 100%;
+    background: #4285f4
+  }
+  .log-out{
+      position: absolute;
+      right: 0;
+      top: 10px;
+  }
+  // 内容区域样式
 .app{
     width: 100%;
     background: #FBF9F9;
     display: flex;
     flex-direction: row;
     .app-menu{
-        // flex: 0 0 1 2;
-        flex: 1;
+        // flex: 1;
         height: 700px;
         margin: 10px 0 0 0;
     }
     .app-context{
-        flex: 9;
-        // flex: 0 1 1 auto;
+        flex: 1;
         height: 700px;
         background: white;
         margin: 10px 10px 0 10px;

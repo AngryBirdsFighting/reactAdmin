@@ -2,48 +2,63 @@
  * @Author: Wang Chao 
  * @Date: 2019-01-07 17:14:07 
  * @Last Modified by: Wang Chao
- * @Last Modified time: 2019-01-08 10:01:03
+ * @Last Modified time: 2019-01-21 19:47:25
  */
 import React, { Component } from 'react';
-import { Form, Input, Button } from 'element-react';
+import {
+    Form, Icon, Input, Button, Checkbox,
+} from 'antd';
+import {setToken} from "../../utils/tools"
 
 
-class Login extends Component {
+class NormalLoginForm extends Component {
     constructor(props) {
         super(props)
     }
-    state = {
-        form: {
-            name: '',
-            password: '',
-        }
-    }
-    componentWillMount() {
-        console.log("woshilogin")
-     }
-    onSubmit(e) {
-        console.log(this.state.form)
+    handleSubmit = (e) => {
         e.preventDefault();
-    }
-    onChange(key, value) {
-        this.state.form[key] = value;
-        this.forceUpdate();
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                setToken("name", values.userName)
+                this.props.history.push("/main/operation/driverManage")
+                console.log('Received values of form: ', values);
+            }
+        });
     }
     render() {
+        const { getFieldDecorator } = this.props.form;
         return (
-            <Form model={this.state.form} labelWidth="80" onSubmit={this.onSubmit.bind(this)}>
-                <Form.Item label="账号">
-                    <Input value={this.state.form.name} onChange={this.onChange.bind(this, 'name')}></Input>
-                </Form.Item>
-                <Form.Item label="密码">
-                    <Input value={this.state.form.password} onChange={this.onChange.bind(this, 'password')}></Input>
+            <div className="login-from">
+                 <Form onSubmit={this.handleSubmit} className="login-form">
+                <Form.Item>
+                    {getFieldDecorator('userName', {
+                        rules: [{ required: true, message: 'Please input your username!' }],
+                    })(
+                        <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+                    )}
                 </Form.Item>
                 <Form.Item>
-                    <Button type="primary" nativeType="submit">登陆</Button>
+                    {getFieldDecorator('password', {
+                        rules: [{ required: true, message: 'Please input your Password!' }],
+                    })(
+                        <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+                    )}
+                </Form.Item>
+                <Form.Item>
+                    {getFieldDecorator('remember', {
+                        valuePropName: 'checked',
+                        initialValue: true,
+                    })(
+                        <Checkbox>Remember me</Checkbox>
+                    )}
+                    <Button type="primary" htmlType="submit" className="login-form-button">
+                        Log in
+                    </Button>
                 </Form.Item>
             </Form>
+            </div>
+           
         )
     }
 }
-
-export default Login
+export default Form.create()(NormalLoginForm); 

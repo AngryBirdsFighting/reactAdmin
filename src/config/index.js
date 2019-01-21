@@ -17,5 +17,5 @@ let baseUrl = "https://www.easy-mock.com/mock/5c00d3a057282f4cecbc6518"
 //       break
 // }
 Config.baseUrl = baseUrl;
-Config.overtime = 20000000; // 请求超时时间
+Config.overtime = 10; // 请求超时时间
 
