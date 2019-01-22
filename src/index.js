@@ -2,13 +2,15 @@
  * @Author: Wang Chao 
  * @Date: 2019-01-07 17:14:50 
  * @Last Modified by: Wang Chao
- * @Last Modified time: 2019-01-14 13:57:59
+ * @Last Modified time: 2019-01-22 17:43:33
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './assets/css/index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { Provider } from 'react-redux';
+import Store from ''';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

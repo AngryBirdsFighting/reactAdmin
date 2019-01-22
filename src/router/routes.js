@@ -2,10 +2,9 @@
  * @Author: Wang Chao 
  * @Date: 2019-01-07 17:14:03 
  * @Last Modified by: Wang Chao
- * @Last Modified time: 2019-01-21 20:48:58
+ * @Last Modified time: 2019-01-22 10:21:47
  */
 import AsyncComponent from "./asyncComponent"
-import { homedir } from "os";
 const CarManage = AsyncComponent(() => import("@view/operation/carManage"))
 const DriverManage = AsyncComponent(() => import("@view/operation/driverManage"))
 const RulesManage = AsyncComponent(() => import("@view/system/rulesManage"))

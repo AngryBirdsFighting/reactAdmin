@@ -2,15 +2,16 @@
  * @Author: Wang Chao 
  * @Date: 2019-01-07 17:14:07 
  * @Last Modified by: Wang Chao
- * @Last Modified time: 2019-01-21 20:13:30
+ * @Last Modified time: 2019-01-22 16:21:31
  */
 import React, { Component } from 'react';
 import {
     Form, Icon, Input, Button, Checkbox,
 } from 'antd';
 import { setToken } from "../../utils/tools"
+import Fetch from "../../fetch/index"
 
-
+let fetch = new Fetch()
 class NormalLoginForm extends Component {
     constructor(props) {
         super(props)
@@ -19,9 +20,23 @@ class NormalLoginForm extends Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                setToken("name", values.userName)
-                this.props.history.push("/main/operation/driverManage")
-                console.log('Received values of form: ', values);
+                let param = {
+                    url: "/login",
+                    data: values
+                }
+                fetch.fetchAjax(param).then( res => {
+                    if (res.success){
+                        // this.props.history.push("/main/operation/driverManage")
+                        // setToken("name", values.userName)
+                        alert(1)
+                    } else {
+
+                    }
+                }).catch(err => {
+                    console.log(err)
+                })
+                // this.props.history.push("/main/operation/driverManage")
+                // console.log('Received values of form: ', values);
             }
         });
     }

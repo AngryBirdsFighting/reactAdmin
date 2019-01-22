@@ -118,5 +118,9 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "react-redux": "^6.0.0",
+    "redux-thunk": "^2.3.0"
   }
 }

@@ -14,12 +14,13 @@ const createSubMenu = (item) => (
 const createMenuItem = (item) => (  
     <Menu.Item key={item.name}>
        <Link to={item.path}>
+       <Icon type="appstore" />
            <span>{item.name}</span>
        </Link>
     </Menu.Item>
 ) 
 export default ({menus, ...props}) => (
-    <Menu   { ...props}>
+    <Menu  { ...props}>
         {menus && menus.map( item => (
             item.childrens ? createSubMenu(item) : createMenuItem(item)
         ))}

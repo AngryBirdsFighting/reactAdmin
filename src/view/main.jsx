@@ -2,7 +2,7 @@
  * @Author: Wang Chao 
  * @Date: 2019-01-07 17:14:32 
  * @Last Modified by: Wang Chao
- * @Last Modified time: 2019-01-21 20:32:05
+ * @Last Modified time: 2019-01-22 16:10:25
  */
 import React, { Component } from 'react';
 import Menu from "@com//menu.jsx";
@@ -17,16 +17,16 @@ class Main extends Component {
     }
     // 在 render 之前调用
     componentWillMount() {
-        console.log(this.props)
-        let param = {
-            url: "/auth/findMenuPerms",
-            data: {}
-        }
-        fetch.fetchAjax(param).then(res => {
-            console.log(res)
-        }).catch( err => {
-            console.log(err)
-        })
+        // console.log(this.props)
+        // let param = {
+        //     url: "/auth/findMenuPerms",
+        //     data: {}
+        // }
+        // fetch.fetchAjax(param).then(res => {
+        //     console.log(res)
+        // }).catch( err => {
+        //     console.log(err)
+        // })
     }
     render() {
         return (

@@ -3,7 +3,7 @@ export default class Config{
 
     }
 }
-let baseUrl = "https://www.easy-mock.com/mock/5c00d3a057282f4cecbc6518"
+let baseUrl = "https://www.easy-mock.com/mock/5c46ccbceaf31779b928adf8"
 // console.log(process.env.NODE_ENV)
 // switch (process.env.NODE_ENV) {
 //   case 'development':
@@ -17,5 +17,5 @@ let baseUrl = "https://www.easy-mock.com/mock/5c00d3a057282f4cecbc6518"
 //       break
 // }
 Config.baseUrl = baseUrl;
-Config.overtime = 10; // 请求超时时间
+Config.overtime = 1000000; // 请求超时时间
 
