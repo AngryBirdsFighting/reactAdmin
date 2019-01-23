@@ -9,6 +9,10 @@ class NavMenu extends Component {
     collapsed: false,
     // menuClass: "menu"
   }
+  componentWillMount() {
+    debugger
+    console.log(this.props)
+  }
   toggleCollapsed = () => {
     this.setState({
       collapsed: !this.state.collapsed,
@@ -24,7 +28,7 @@ class NavMenu extends Component {
         <SiderMenu   
           // className={this.state.menuClass}
           style={{width: this.state.collapsed ? "80px" : "200px"}}
-          menus={menus} 
+          menus={this.props.menu.data} 
           defaultSelectedKeys={['driverManage']}
           mode="inline"
           theme="light"

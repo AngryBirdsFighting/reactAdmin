@@ -2,7 +2,7 @@
  * @Author: Wang Chao 
  * @Date: 2019-01-07 17:14:03 
  * @Last Modified by: Wang Chao
- * @Last Modified time: 2019-01-22 10:21:47
+ * @Last Modified time: 2019-01-23 19:15:44
  */
 import AsyncComponent from "./asyncComponent"
 const CarManage = AsyncComponent(() => import("@view/operation/carManage"))
@@ -17,18 +17,18 @@ const Home = AsyncComponent(() => import("@view/home"))
 
 export default [
     { path: "/main/home", name: "home",component: Home},
-    {
-        path: "/main/operation", name: "operation",
-        childrens: [
+    // {
+    //     path: "/main/operation", name: "operation",
+    //     childrens: [
             { path: "/main/operation/carManage", name: "carManage", component: CarManage },
-            { path: "/main/operation/driverManage", name: "driverManage", component: DriverManage } 
-        ]
-    },
-    {
-        path: "/main/system", name: "system",
-        childrens: [
+            { path: "/main/operation/driverManage", name: "driverManage", component: DriverManage } ,
+    //     ]
+    // },
+    // {
+    //     path: "/main/system", name: "system",
+    //     childrens: [
             { path: "/main/system/userManage", name: "userManage", component: UserManage },
             { path: "/main/system/rulesManage", name: "rulesManage", component: RulesManage }
-        ]
-    }      
+    //     ]
+    // }      
 ]

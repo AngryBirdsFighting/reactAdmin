@@ -2,19 +2,32 @@
  * @Author: Wang Chao 
  * @Date: 2019-01-07 17:14:07 
  * @Last Modified by: Wang Chao
- * @Last Modified time: 2019-01-22 16:21:31
+ * @Last Modified time: 2019-01-23 17:05:23
  */
 import React, { Component } from 'react';
 import {
     Form, Icon, Input, Button, Checkbox,
 } from 'antd';
-import { setToken } from "../../utils/tools"
-import Fetch from "../../fetch/index"
+import { setToken } from "../../utils/tools";
+import Fetch from "../../fetch/index";
+import { connect} from "react-redux";
+import { setInfoAsync } from "../../redux/action/"
 
 let fetch = new Fetch()
 class NormalLoginForm extends Component {
     constructor(props) {
         super(props)
+    }
+    componentWillMount() {
+    }
+    componentWillReceiveProps(nextProps){
+        let data = nextProps.menu.data
+        debugger
+        if(data.length > 0){
+            let path = data[0].childrens ?  data[0].childrens[0].path : data[0].path
+            this.props.history.push(path)
+            setToken("name", "aaa")
+        }
     }
     handleSubmit = (e) => {
         e.preventDefault();
@@ -26,17 +39,12 @@ class NormalLoginForm extends Component {
                 }
                 fetch.fetchAjax(param).then( res => {
                     if (res.success){
-                        // this.props.history.push("/main/operation/driverManage")
-                        // setToken("name", values.userName)
-                        alert(1)
+                         this.props.setInfoAsync()
                     } else {
-
                     }
                 }).catch(err => {
                     console.log(err)
                 })
-                // this.props.history.push("/main/operation/driverManage")
-                // console.log('Received values of form: ', values);
             }
         });
     }
@@ -75,4 +83,5 @@ class NormalLoginForm extends Component {
         )
     }
 }
+NormalLoginForm = connect(state =>({menu:state.permissionData}), {setInfoAsync})(NormalLoginForm)
 export default Form.create()(NormalLoginForm); 

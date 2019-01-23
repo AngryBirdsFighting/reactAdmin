@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from 'react-router-dom';
 import { Menu, Icon } from 'antd';
+import { withRouter } from 'react-router';
 const SubMenu = Menu.SubMenu;
 
 const createSubMenu = (item) => (
@@ -11,7 +12,10 @@ const createSubMenu = (item) => (
   </SubMenu>
 )
 
-const createMenuItem = (item) => (  
+const createMenuItem = (item) => 
+{
+    debugger
+return(  
     <Menu.Item key={item.name}>
        <Link to={item.path}>
        <Icon type="appstore" />
@@ -19,10 +23,11 @@ const createMenuItem = (item) => (
        </Link>
     </Menu.Item>
 ) 
-export default ({menus, ...props}) => (
+}
+export default withRouter(({menus, ...props}) => (
     <Menu  { ...props}>
         {menus && menus.map( item => (
             item.childrens ? createSubMenu(item) : createMenuItem(item)
         ))}
     </Menu>
-)
+))

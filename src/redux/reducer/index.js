@@ -1,16 +1,14 @@
 import * as type from '../action/type.js';
 import { combineReducers } from 'redux';
-const permissionData = (state = [], action) => {
+const permissionData = (state = { status:true, data :[]}, action) => {
     switch(action.type){
         case type.SET_PERMISSION:
-        return Object.assign({}, state, {
-            visibilityFilter: action.filter
-          });
+        return {...state , status:true, data:action.data}
         default: 
-        return {}
+        return {...state}
     }
 }
 
 export default combineReducers({
-    httpData
+    permissionData
 });

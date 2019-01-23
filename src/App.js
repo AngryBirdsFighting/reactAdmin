@@ -2,13 +2,14 @@
  * @Author: Wang Chao 
  * @Date: 2019-01-07 17:14:45 
  * @Last Modified by: Wang Chao
- * @Last Modified time: 2019-01-22 11:27:58
+ * @Last Modified time: 2019-01-23 19:00:18
  */
 import React, { Component } from 'react';
 import { HashRouter as Router, Route, Switch ,Redirect} from 'react-router-dom';
 import NoFound from "@view/error/nofound"
 import Main from "@view/main"
 import Login from "@view/login/login"
+// import { withRouter } from 'react-router';
 
 
 class App extends Component {
