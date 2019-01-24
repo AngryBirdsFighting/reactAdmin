@@ -2,11 +2,12 @@
  * @Author: Wang Chao 
  * @Date: 2019-01-22 16:49:47 
  * @Last Modified by: Wang Chao
- * @Last Modified time: 2019-01-23 16:55:54
+ * @Last Modified time: 2019-01-24 17:41:38
  * @Description:  redux action 管理
  */
 import * as type from './type';
 import Fetch from "../../fetch/index"
+import {setToken} from "../../utils/tools"
 let fetch = new Fetch()
 
 let getInfo = () => {
@@ -35,15 +36,40 @@ let getPermission = () => {
 const setInfo = () =>{
     return {type: type.SET_INFO}
 }
-const setPermission = (data) =>(
+const setPermission = (data, defaultPath,auths) =>(
     {type: type.SET_PERMISSION,
-     data
+     data,
+     defaultPath,
+     auths
     }
 )
-export const  setInfoAsync = () => {
+const createAuths = (menus, arr) => {
+    let auths =  arr.length > 0 ?  arr :  []
+    menus.forEach( item => {
+       if(item.childrens){
+        createAuths(item.childrens, auths)
+       }else{
+        auths.push({
+               name: item.name,
+               auth: item.auth
+           })
+       }
+    })
+    return auths
+}
+export const  setInfoAsync = (callBack) => {
     return dispatch => {
         Promise.all([getInfo(), getPermission()]).then( res => {
-            dispatch(setPermission(res[1].permission))
+            let permission = res[1].permission
+            if(permission && permission.length > 0){
+                let defaultPath = permission[0].childrens ? permission[0].childrens[0].path : permission[0].path;
+                let auths = createAuths(permission,[])
+                dispatch(setPermission(permission, defaultPath, auths))
+            
+                setToken("name", "aaa")
+                setToken("defaultPath", defaultPath)
+                callBack(defaultPath)
+            }         
         }).catch( err => {
         })
     }

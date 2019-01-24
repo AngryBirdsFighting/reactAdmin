@@ -2,7 +2,7 @@
  * @Author: Wang Chao 
  * @Date: 2019-01-07 17:14:07 
  * @Last Modified by: Wang Chao
- * @Last Modified time: 2019-01-23 17:05:23
+ * @Last Modified time: 2019-01-24 16:10:35
  */
 import React, { Component } from 'react';
 import {
@@ -12,6 +12,7 @@ import { setToken } from "../../utils/tools";
 import Fetch from "../../fetch/index";
 import { connect} from "react-redux";
 import { setInfoAsync } from "../../redux/action/"
+import { withRouter } from 'react-router';
 
 let fetch = new Fetch()
 class NormalLoginForm extends Component {
@@ -20,26 +21,21 @@ class NormalLoginForm extends Component {
     }
     componentWillMount() {
     }
-    componentWillReceiveProps(nextProps){
-        let data = nextProps.menu.data
-        debugger
-        if(data.length > 0){
-            let path = data[0].childrens ?  data[0].childrens[0].path : data[0].path
-            this.props.history.push(path)
-            setToken("name", "aaa")
-        }
-    }
     handleSubmit = (e) => {
         e.preventDefault();
+        let vm = this
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 let param = {
                     url: "/login",
                     data: values
                 }
+               
                 fetch.fetchAjax(param).then( res => {
                     if (res.success){
-                         this.props.setInfoAsync()
+                         this.props.setInfoAsync( (path) => {
+                             vm.props.history.push(path)
+                         })
                     } else {
                     }
                 }).catch(err => {
@@ -52,7 +48,7 @@ class NormalLoginForm extends Component {
         const { getFieldDecorator } = this.props.form;
         return (
             <div className="login-from">
-                <Form onSubmit={this.handleSubmit} className="login-form">
+                <Form onSubmit={this.handleSubmit.bind(this)} className="login-form">
                     <Form.Item>
                         {getFieldDecorator('userName', {
                             rules: [{ required: true, message: 'Please input your username!' }],
@@ -84,4 +80,4 @@ class NormalLoginForm extends Component {
     }
 }
 NormalLoginForm = connect(state =>({menu:state.permissionData}), {setInfoAsync})(NormalLoginForm)
-export default Form.create()(NormalLoginForm); 
+export default Form.create()(withRouter(NormalLoginForm)); 

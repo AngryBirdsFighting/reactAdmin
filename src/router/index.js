@@ -2,7 +2,7 @@
  * @Author: Wang Chao 
  * @Date: 2019-01-07 17:13:25 
  * @Last Modified by: Wang Chao
- * @Last Modified time: 2019-01-23 19:13:10
+ * @Last Modified time: 2019-01-24 19:56:08
  */
 import routes from "./routes"
 import React, { Component } from 'react';
@@ -14,26 +14,33 @@ import { connect} from "react-redux";
     constructor(props) {
         super(props)
     }
-    componentWillMount() {
-        console.log(this.props)
-        // this.props.setInfoAsync()
-    }
     isLogin(component){
         let token = getToken("name")
         return  token  ? component : <Redirect to={'/login'} />;
     }
     render() {
+        const { auths } = this.props;
+        let auth = {};
         return (
             <div>
             <Switch>
                 {routes.map((r) => {
                     const createRouter = r => {
                         // return <Route path={r.path} exact  component={r.component} />
-                          return <Route exact path={r.path} key={r.name}   render={ props => 
-                            this.isLogin(<r.component {...props}/>)
-                         }/>
+                        return <Route exact path={r.path} key={r.name}   render={ props => {
+                            if(auths){
+                                let urlList = props.location.pathname.split("/")
+                                let a = urlList[urlList.length - 1]
+                                let authData = auths.find( item => {
+                                    return item.name == a
+                                })
+                                auth = authData.auth
+                            }
+                          return   this.isLogin(<r.component auth = {auth} name={r.name} {...props}/>)
+                        }
+                        }/>
                     }
-                  return   createRouter(r)
+                  return createRouter(r)
                 })}
                 <Route render={() => <Redirect to="/404" />} />
             </Switch>

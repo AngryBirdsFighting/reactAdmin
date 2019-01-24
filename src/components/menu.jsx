@@ -3,15 +3,25 @@ import React, { Component } from "react";
 import {  Icon, Button } from 'antd';
 // const SubMenu = Menu.SubMenu;
 import SiderMenu from "@com/siderMenu.js"
-import menus from "../router/routes"
+// import menus from "../router/routes"
 class NavMenu extends Component {
   state = {
     collapsed: false,
+    defaultSelectedKeys: [],
+    defaultOpenKeys:[]
     // menuClass: "menu"
   }
   componentWillMount() {
-    debugger
-    console.log(this.props)
+    
+      let menuUrl =  this.props.location.pathname.split("/")
+      this.setState({
+        defaultSelectedKeys:[menuUrl[(menuUrl.length - 1)]]
+    })
+      if(menuUrl.length == 4){
+        this.setState({
+          defaultOpenKeys:[menuUrl[2]]
+      })
+      }
   }
   toggleCollapsed = () => {
     this.setState({
@@ -20,25 +30,24 @@ class NavMenu extends Component {
     });
   }
   render() {
+
     return (
       <div>
         <Button type="dashed" className="change-menu" onClick={this.toggleCollapsed.bind(this)} style={{ marginBottom: 16 }}>
           <Icon type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} />
         </Button>
         <SiderMenu   
-          // className={this.state.menuClass}
           style={{width: this.state.collapsed ? "80px" : "200px"}}
           menus={this.props.menu.data} 
-          defaultSelectedKeys={['driverManage']}
+          defaultSelectedKeys={this.state.defaultSelectedKeys}
           mode="inline"
           theme="light"
           inlineCollapsed={this.state.collapsed}
-          defaultOpenKeys={['operation']}>
+          defaultOpenKeys={this.state.defaultOpenKeys}>
         </SiderMenu>
       </div>
     );
   }
-
 }
 
 

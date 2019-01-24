@@ -14,7 +14,6 @@ const createSubMenu = (item) => (
 
 const createMenuItem = (item) => 
 {
-    debugger
 return(  
     <Menu.Item key={item.name}>
        <Link to={item.path}>
@@ -24,10 +23,13 @@ return(
     </Menu.Item>
 ) 
 }
-export default withRouter(({menus, ...props}) => (
+export default withRouter(({menus, ...props}) =>
+{    
+return  (
+    
     <Menu  { ...props}>
         {menus && menus.map( item => (
             item.childrens ? createSubMenu(item) : createMenuItem(item)
         ))}
     </Menu>
-))
+)})
