@@ -2,7 +2,7 @@
  * @Author: Wang Chao 
  * @Date: 2019-01-07 17:14:32 
  * @Last Modified by: Wang Chao
- * @Last Modified time: 2019-01-24 20:28:08
+ * @Last Modified time: 2019-01-29 11:03:41
  */
 import React, { Component } from 'react';
 import Menu from "@com//menu.jsx";
@@ -26,7 +26,7 @@ class Main extends Component {
                 <HeaderBar ></HeaderBar>
                 <div className={"app"}>
                     <div className={"app-menu"}>
-                        <Menu {...this.props}></Menu></div>
+                        <Menu></Menu></div>
                     <div className={"app-context"}>
                         <MRouter auths = {menu.auths} auth=""></MRouter>
                     </div>

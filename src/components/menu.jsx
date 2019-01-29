@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-// import { Link } from 'react-router-dom';
 import {  Icon, Button } from 'antd';
-// const SubMenu = Menu.SubMenu;
 import SiderMenu from "@com/siderMenu.js"
+import { connect} from "react-redux";
+import { withRouter } from 'react-router';
 // import menus from "../router/routes"
 class NavMenu extends Component {
   state = {
@@ -12,7 +12,6 @@ class NavMenu extends Component {
     // menuClass: "menu"
   }
   componentWillMount() {
-    
       let menuUrl =  this.props.location.pathname.split("/")
       this.setState({
         defaultSelectedKeys:[menuUrl[(menuUrl.length - 1)]]
@@ -50,5 +49,5 @@ class NavMenu extends Component {
   }
 }
 
-
-export default NavMenu
+NavMenu = connect(state =>({menu:state.permissionData}))(NavMenu)
+export default withRouter(NavMenu)

@@ -2,7 +2,7 @@
  * @Author: Wang Chao 
  * @Date: 2019-01-07 17:14:45 
  * @Last Modified by: Wang Chao
- * @Last Modified time: 2019-01-24 20:36:12
+ * @Last Modified time: 2019-01-29 10:45:36
  */
 import React, { Component } from 'react';
 import { HashRouter as Router, Route, Switch ,Redirect} from 'react-router-dom';
@@ -20,7 +20,7 @@ class App extends Component {
       <Router>
         <Switch>
           <Route path="/" exact render={() => {
-           return   getToken("defaultPath") ? <Redirect to={getToken("defaultPath")} /> : <Login/>
+           return   getToken("defaultPath") ? <Redirect to={getToken("defaultPath")} /> : <Redirect to="/login" />
           }} ></Route>
           <Route path="/main" component={Main} ></Route>
           <Route path="/login" component={Login}></Route>
