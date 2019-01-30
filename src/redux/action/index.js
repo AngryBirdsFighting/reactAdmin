@@ -2,7 +2,7 @@
  * @Author: Wang Chao 
  * @Date: 2019-01-22 16:49:47 
  * @Last Modified by: Wang Chao
- * @Last Modified time: 2019-01-24 17:41:38
+ * @Last Modified time: 2019-01-29 11:13:40
  * @Description:  redux action 管理
  */
 import * as type from './type';
@@ -57,7 +57,7 @@ const createAuths = (menus, arr) => {
     })
     return auths
 }
-export const  setInfoAsync = (callBack) => {
+export const  setInfoAsync = () => {
     return dispatch => {
         Promise.all([getInfo(), getPermission()]).then( res => {
             let permission = res[1].permission
@@ -65,10 +65,8 @@ export const  setInfoAsync = (callBack) => {
                 let defaultPath = permission[0].childrens ? permission[0].childrens[0].path : permission[0].path;
                 let auths = createAuths(permission,[])
                 dispatch(setPermission(permission, defaultPath, auths))
-            
                 setToken("name", "aaa")
                 setToken("defaultPath", defaultPath)
-                callBack(defaultPath)
             }         
         }).catch( err => {
         })
